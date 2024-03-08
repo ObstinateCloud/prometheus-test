@@ -1,0 +1,25 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: legend-prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' ##actuator暴漏的端口
+      base-path: /actuator
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true # 是否启用prometheus
+  server:
+    port: 7005
