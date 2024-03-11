@@ -1,8 +1,11 @@
 package com.legendyun.prometheus.controller;
 
+import com.legendyun.prometheus.custom2.MyMetricsService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -14,9 +17,13 @@ import java.util.Date;
 @RestController
 public class HelloController {
 
+    @Resource
+    private MyMetricsService myMetricsService;
+
     @GetMapping("sayHello")
     public String sayHello(String name){
         System.out.println("hello world "+name);
+        myMetricsService.aCounter.increment();
         return "hello "+ name+" "+ new Date();
     }
 
