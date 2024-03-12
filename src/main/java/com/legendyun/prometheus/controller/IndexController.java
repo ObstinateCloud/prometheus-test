@@ -26,14 +26,16 @@ public class IndexController {
 
     @PostConstruct
     private void init(){
-        counter_core = registry.counter("app_requests_method_count", "method", "IndexController.core","legend-label","legend12333333");
-        counter_index = registry.counter("app_requests_method_count", "method", "IndexController.index","legend-label","legend4566666");
+        counter_core = registry.counter("app_requests_method_core", "method", "IndexController.core","legend-label","legend12333333");
+        counter_index = registry.counter("app_requests_method_index", "method", "IndexController.index","legend-label","legend4566666");
     }
 
     @RequestMapping(value = "/index")
     public Object index(){
         try{
-            counter_index.increment();
+//            counter_index.increment();
+            registry.counter("app_requests_method_index", "method", "IndexController.index","legend-label","legend4566666").increment();
+            // 同名的数据类型再次注册只会有一个
         } catch (Exception e) {
             return e;
         }
@@ -43,7 +45,9 @@ public class IndexController {
     @RequestMapping(value = "/core")
     public Object coreUrl(){
         try{
-            counter_core.increment();
+//            counter_core.increment();
+            // 可以根据标签进行过滤
+            registry.get("app_requests_method_core").counter().increment();
         } catch (Exception e) {
             return e;
         }
