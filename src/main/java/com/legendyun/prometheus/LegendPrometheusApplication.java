@@ -20,9 +20,5 @@ public class LegendPrometheusApplication {
         SpringApplication.run(LegendPrometheusApplication.class,args);
     }
 
-    @Bean(value = "meterRegistryCustomizer")
-    MeterRegistryCustomizer<MeterRegistry> meterRegistryCustomizer(@Value("${spring.application.name}") String applicationName) {
-        return meterRegistry -> meterRegistry.config()
-                .commonTags("application", applicationName);
-    }
+
 }
