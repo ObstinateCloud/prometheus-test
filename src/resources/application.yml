@@ -9,7 +9,7 @@ management:
     web:
       exposure:
         include: '*' ##actuator暴漏的端口
-      base-path: /actuator
+      base-path: /actuator # 默认为 /
   endpoint:
     shutdown:
       enabled: true
@@ -22,4 +22,4 @@ management:
       prometheus:
         enabled: true # 是否启用prometheus
   server:
-    port: 7005
+    port: 7005 #自定义actuator端口 默认为服务端口
